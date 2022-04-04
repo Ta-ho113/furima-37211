@@ -29,45 +29,23 @@ Things you may want to cover:
 
 ## users テーブル
 
-| Column             | Type       | Options                                   |
-| ------------------ | ---------- | ----------------------------------------- |
-| nickname           | string     | null: false                               |
-| email              | string     | null: false, unique: true                 |
-| encrypted_password | string     | null: false                               |
-| last_name          | string     | null: false, with: /\A[ぁ-んァ-ヶ一-龥]/+\z |
-| first_name         | string     | null: false, with: /\A[ぁ-んァ-ヶ一-龥]/+\z |
-| last_name          | string     | null: false, with: /\p{katakana}/         |
-| first_name         | string     | null: false, with: /\p{katakana}/         |
-| birth_year_id      | integer    | null: false                               |
-| birth_month_id     | integer    | null: false                               |
-| birth_day_id       | integer    | null: false                               |
+| Column             | Type   | Options                                   |
+| ------------------ | ------ | ----------------------------------------- |
+| nickname           | string | null: false                               |
+| email              | string | null: false, unique: true                 |
+| encrypted_password | string | null: false                               |
+| last_name          | string | null: false, with: /\A[ぁ-んァ-ヶ一-龥]/+\z |
+| first_name         | string | null: false, with: /\A[ぁ-んァ-ヶ一-龥]/+\z |
+| last_kanakana      | string | null: false, with: /\p{katakana}/         |
+| first_kanakana     | string | null: false, with: /\p{katakana}/         |
+| birth_day_id       | date   | null: false                               |
 
 
 ### Association
-
-has_many :buyers
+- has_many :purchased_items, through: :buyer
 - has_many :comments
-- has_many :items, through: :buyers
-
-
-
-## buyers テーブル
-
-| Column        | Type       | Options                        |
-| ------------- | ---------- | ------------------------------ |
-| post_number   | string     | null: false                    |
-| region_id     | integer    | null: false                    |
-| municipaliyty | string     | null: false                    |
-| house_number  | string     | null: false                    |
-| building_name | string     |                                |
-| phone_number  | integer    | null: false                    |
-| user          | references | null: false, foreign_key: true |
-
-
-### Association
-
-- belongs_to :user
-- has_many   :items
+- has_many :items
+- has_one  :buyer
 
 
 
@@ -83,15 +61,51 @@ has_many :buyers
 | region_id           | integer    | null: false                    |
 | shipping_date_id    | integer    | null: false                    |
 | price               | integer    | null: false                    |
-| buyer               | references | null: false, foreign_key: true |
 | user                | references | null: false, foreign_key: true |
 
 
 ### Association
 
 - belongs_to :user
-- belongs_to :buyer
 - has_many   :comments
+- has_one    :purchased_item
+
+
+
+## buyers テーブル
+
+| Column        | Type       | Options                        |
+| ------------- | ---------- | ------------------------------ |
+| post_number   | string     | null: false                    |
+| region_id     | integer    | null: false                    |
+| municipaliyty | string     | null: false                    |
+| house_number  | string     | null: false                    |
+| building_name | string     |                                |
+| phone_number  | string     | null: false                    |
+| user          | references | null: false, foreign_key: true |
+
+
+### Association
+
+- belongs_to :user
+- has_many   :purchased_items
+
+
+
+## purchased_items テーブル
+
+| Column      | Type       | Options                        |
+| ----------- | ---------- | ------------------------------ |
+| buyer       | references | null: false, foreign_key: true |
+| user        | references | null: false, foreign_key: true |
+| item        | references | null: false, foreign_key: true |
+
+
+### Association
+
+- belongs_to :buyer
+- belongs_to :user
+- belongs_to :item
 
 
 
@@ -102,6 +116,7 @@ has_many :buyers
 | content     | text       | null: false                    |
 | user        | references | null: false, foreign_key: true |
 | item        | references | null: false, foreign_key: true |
+
 
 ### Association
 
