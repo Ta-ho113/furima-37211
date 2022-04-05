@@ -42,7 +42,7 @@ Things you may want to cover:
 
 
 ### Association
-- has_one  :purchased_item, through: :item
+- has_one  :purchased_item
 - has_many :comments
 - has_many :items
 
@@ -73,20 +73,20 @@ Things you may want to cover:
 
 ## buyers テーブル
 
-| Column          | Type       | Options                        |
-| --------------- | ---------- | ------------------------------ |
-| post_number     | string     | null: false                    |
-| region_id       | integer    | null: false                    |
-| municipaliyty   | string     | null: false                    |
-| house_number    | string     | null: false                    |
-| building_name   | string     |                                |
-| phone_number    | string     | null: false                    |
-| purchased_items | references | null: false, foreign_key: true |
+| Column         | Type       | Options                        |
+| -------------- | ---------- | ------------------------------ |
+| post_number    | string     | null: false                    |
+| region_id      | integer    | null: false                    |
+| municipaliyty  | string     | null: false                    |
+| house_number   | string     | null: false                    |
+| building_name  | string     |                                |
+| phone_number   | string     | null: false                    |
+| purchased_item | references | null: false, foreign_key: true |
 
 
 ### Association
 
-- belongs_to :purchased_items
+- belongs_to :purchased_item
 
 
 
