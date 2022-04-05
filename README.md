@@ -42,7 +42,7 @@ Things you may want to cover:
 
 
 ### Association
-- has_one  :purchased_item
+- has_many :purchased_items
 - has_many :comments
 - has_many :items
 
@@ -77,7 +77,7 @@ Things you may want to cover:
 | -------------- | ---------- | ------------------------------ |
 | post_number    | string     | null: false                    |
 | region_id      | integer    | null: false                    |
-| municipaliyty  | string     | null: false                    |
+| municipality   | string     | null: false                    |
 | house_number   | string     | null: false                    |
 | building_name  | string     |                                |
 | phone_number   | string     | null: false                    |
