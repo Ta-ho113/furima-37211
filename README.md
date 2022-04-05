@@ -42,10 +42,9 @@ Things you may want to cover:
 
 
 ### Association
-- has_many :purchased_items, through: :buyer
+- has_one  :purchased_item, through: :item
 - has_many :comments
 - has_many :items
-- has_one  :buyer
 
 
 
@@ -74,21 +73,20 @@ Things you may want to cover:
 
 ## buyers テーブル
 
-| Column        | Type       | Options                        |
-| ------------- | ---------- | ------------------------------ |
-| post_number   | string     | null: false                    |
-| region_id     | integer    | null: false                    |
-| municipaliyty | string     | null: false                    |
-| house_number  | string     | null: false                    |
-| building_name | string     |                                |
-| phone_number  | string     | null: false                    |
-| user          | references | null: false, foreign_key: true |
+| Column          | Type       | Options                        |
+| --------------- | ---------- | ------------------------------ |
+| post_number     | string     | null: false                    |
+| region_id       | integer    | null: false                    |
+| municipaliyty   | string     | null: false                    |
+| house_number    | string     | null: false                    |
+| building_name   | string     |                                |
+| phone_number    | string     | null: false                    |
+| purchased_items | references | null: false, foreign_key: true |
 
 
 ### Association
 
-- belongs_to :user
-- has_many   :purchased_items
+- belongs_to :purchased_items
 
 
 
@@ -96,16 +94,15 @@ Things you may want to cover:
 
 | Column      | Type       | Options                        |
 | ----------- | ---------- | ------------------------------ |
-| buyer       | references | null: false, foreign_key: true |
 | user        | references | null: false, foreign_key: true |
 | item        | references | null: false, foreign_key: true |
 
 
 ### Association
 
-- belongs_to :buyer
 - belongs_to :user
 - belongs_to :item
+- has_one    :buyer
 
 
 
