@@ -1,16 +1,17 @@
 class User < ApplicationRecord
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+  VALID_PASSWORD_REGEX = /\A(?=.*?[a-z])(?=.*?[\d])[a-z\d]+\z/i.freeze
+  JAPANESE_CHARACTER = /\A[ぁ-んァ-ン一-龥]+\z/
+  JAPANESE_KATAKANA = /\A[ァ-ヶー－]+\z/
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   validates :nickname,              presence: true
-  validates :email,                 presence: true
-  validates :encrypted_password,    presence: true
+  validates :email,                 presence: true, uniqueness: true, format: { with: /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i }
+  validates :password,              confirmation: true, length: { minimum: 6 }, format: { with: VALID_PASSWORD_REGEX }
   validates :password_confirmation, presence: true
-  validates :last_name,             presence: true
-  validates :first_name,            presence: true
-  validates :last_katakana,         presence: true
-  validates :first_katakana,        presence: true
+  validates :last_name,             presence: true, format: { with: JAPANESE_CHARACTER }
+  validates :first_name,            presence: true, format: { with: JAPANESE_CHARACTER }
+  validates :last_katakana,         presence: true, format: { with: JAPANESE_KATAKANA }
+  validates :first_katakana,        presence: true, format: { with: JAPANESE_KATAKANA }
   validates :birth_day_id,          presence: true
   has_many :purchased_items,        dependent: :destroy
   has_many :comments,               dependent: :destroy
