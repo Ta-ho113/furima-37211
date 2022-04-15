@@ -76,7 +76,7 @@ RSpec.describe User, type: :model do
       expect(@user.errors.full_messages).to include "Last katakana can't be blank"
     end
     it "お名前(姓:カナ入力)は、全角（カタカナ）での入力が必須であること。" do
-      @user.last_katakana = "kana"
+      @user.last_katakana = "かな"
       @user.valid?
       expect(@user.errors.full_messages).to include "Last katakana is invalid"
     end
@@ -86,7 +86,7 @@ RSpec.describe User, type: :model do
       expect(@user.errors.full_messages).to include "First katakana can't be blank"
     end
     it "お名前(名:カナ入力)は、全角（カタカナ）での入力が必須であること。" do
-      @user.first_katakana = "kana"
+      @user.first_katakana = "かな"
       @user.valid?
       expect(@user.errors.full_messages).to include "First katakana is invalid"
     end
