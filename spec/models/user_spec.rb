@@ -13,9 +13,9 @@ RSpec.describe User, type: :model do
       expect(@user.errors.full_messages).to include "Nickname can't be blank"
     end
     it "メールアドレスが必須であること" do
-      @user.nickname = ''
+      @user.email = ''
       @user.valid?
-      expect(@user.errors.full_messages).to include "Nickname can't be blank"
+      expect(@user.errors.full_messages).to include "Email can't be blank"
     end
     it "メールアドレスが一意性であること" do
       @user.save
@@ -23,6 +23,11 @@ RSpec.describe User, type: :model do
       another_user.email = @user.email
       another_user.valid?
       expect(another_user.errors.full_messages).to include "Email has already been taken"
+    end
+    it "メールアドレスは、@を含む必要があること" do
+      @user.email = 'testmail.com'
+      @user.valid?
+      expect(@user.errors.full_messages).to include "Email is invalid"
     end
     it "パスワードが必須であること" do
       @user.password = ''
@@ -34,8 +39,18 @@ RSpec.describe User, type: :model do
       @user.valid?
       expect(@user.errors.full_messages).to include "Password is too short (minimum is 6 characters)"
     end
-    it "パスワードは、半角英数字混合での入力が必須必須であること" do
+    it "半角英語のみでは登録できない" do
       @user.password = "aaaaaa"
+      @user.valid?
+      expect(@user.errors.full_messages).to include "Password is invalid"
+    end
+    it "半角数字のみでは登録できない" do
+      @user.password = "444444"
+      @user.valid?
+      expect(@user.errors.full_messages).to include "Password is invalid"
+    end
+    it "全角では登録できないこと" do
+      @user.password = "DDD４４４"
       @user.valid?
       expect(@user.errors.full_messages).to include "Password is invalid"
     end
