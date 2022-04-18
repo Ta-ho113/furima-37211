@@ -72,9 +72,7 @@
 }
 
 .lists-right {
-  display: flex;
   list-style: none;
-  align-items: flex-end;
 }
 
 
@@ -101,4 +99,14 @@
 .sign-up {
   text-decoration: none;
   color: #333333;
+}
+
+.user_nav grid-6{
+  display: flex;
+  align-items: flex-end;
+}
+
+.grid-6{
+  display: flex;
+  align-items: flex-end;
 }
