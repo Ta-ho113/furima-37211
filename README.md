@@ -36,8 +36,8 @@ Things you may want to cover:
 | encrypted_password | string | null: false                               |
 | last_name          | string | null: false, with: /\A[ぁ-んァ-ヶ一-龥]/+\z |
 | first_name         | string | null: false, with: /\A[ぁ-んァ-ヶ一-龥]/+\z |
-| last_kanakana      | string | null: false, with: /\p{katakana}/         |
-| first_kanakana     | string | null: false, with: /\p{katakana}/         |
+| last_katakana      | string | null: false, with: /\p{katakana}/         |
+| first_katakana     | string | null: false, with: /\p{katakana}/         |
 | birth_day_id       | date   | null: false                               |
 
 
