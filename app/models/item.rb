@@ -1,11 +1,11 @@
 class Item < ApplicationRecord
   extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to       :user
-  belongs_to       :category_genre
-  belongs_to       :state_genre
-  belongs_to       :postage_genre
-  belongs_to       :region_genre
-  belongs_to       :shipping_date_genre
+  belongs_to       :category
+  belongs_to       :state
+  belongs_to       :postage
+  belongs_to       :region
+  belongs_to       :shipping_date
   has_one_attached :image
   validates        :name,             presence: true
   validates        :explanation,      presence: true
