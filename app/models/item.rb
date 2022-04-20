@@ -7,6 +7,7 @@ class Item < ApplicationRecord
   belongs_to       :region
   belongs_to       :shipping_date
   has_one_attached :image
+  validates        :image,            presence: true
   validates        :name,             presence: true
   validates        :explanation,      presence: true
   validates        :category_id,      numericality: { other_than: 1 }
