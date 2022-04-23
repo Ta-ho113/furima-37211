@@ -12,7 +12,7 @@ class User < ApplicationRecord
   validates :last_katakana,         presence: true, format: { with: JAPANESE_KATAKANA }
   validates :first_katakana,        presence: true, format: { with: JAPANESE_KATAKANA }
   validates :birth_day_id,          presence: true
-  #has_many :purchased_items,       dependent: :destroy
+  has_many  :orders,                dependent: :destroy
   #has_many :comments,              dependent: :destroy
   has_many  :items,                 dependent: :destroy
 end
