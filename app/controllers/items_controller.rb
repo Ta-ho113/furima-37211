@@ -50,7 +50,7 @@ class ItemsController < ApplicationController
   end
 
   def ensure_current_user
-    if current_user.id != @item.user_id
+    if current_user.id != @item.user_id || @item.order
       redirect_to root_path
     end
   end
