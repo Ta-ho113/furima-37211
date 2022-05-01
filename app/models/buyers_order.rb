@@ -10,7 +10,7 @@ class BuyersOrder
     validates :post_number,  format: {with: /\A[0-9]{3}-[0-9]{4}\z/, message: "is invalid. Include hyphen(-)"}
     validates :municipality, format: {with: JAPANESE_CHARACTER}
     validates :house_number
-    validates :phone_number, format: {with: /\A[0-9]+\z/}
+    validates :phone_number, format: {with: /\A[0-9]+\z/}, length: {minimum: 10, maximum: 11}
   end
   validates :region_id,      numericality: {other_than: 1}
 

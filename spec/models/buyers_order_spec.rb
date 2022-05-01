@@ -60,6 +60,16 @@ RSpec.describe BuyersOrder, type: :model do
         @buyers_order.valid?
         expect(@buyers_order.errors.full_messages).to include("Phone number is invalid")
       end
+      it 'phone_numberが9桁以下だと保存できないこと' do
+        @buyers_order.phone_number = '123456789'
+        @buyers_order.valid?
+        expect(@buyers_order.errors.full_messages).to include("Phone number is too short (minimum is 10 characters)")
+      end
+      it 'phone_numberが12桁以上だと保存できないこと' do
+        @buyers_order.phone_number = '123456789012'
+        @buyers_order.valid?
+        expect(@buyers_order.errors.full_messages).to include("Phone number is too long (maximum is 11 characters)")
+      end
       it 'userが紐付いていないと保存できないこと' do
         @buyers_order.user_id = nil
         @buyers_order.valid?
