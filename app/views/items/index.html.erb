@@ -118,8 +118,7 @@
       新規投稿商品
     </div>
     <ul class='item-lists'>
-    <% @items.each do |item| %>
-      <% if item.image.attached? %>
+      <% @items.each do |item| %>
         <li class='list'>
           <%= link_to item_path(item.id), method: :get do %>
           <div class='item-img-content'>
@@ -146,7 +145,8 @@
           </div>
           <% end %>
         </li>
-      <% else %>
+      <% end %>
+      <% if @items.length == 0 %>
         <li class='list'>
           <%= link_to '#' do %>
           <%= image_tag "https://tech-master.s3.amazonaws.com/uploads/curriculums/images/Rails1-4/sample.jpg", class: "item-img" %>
@@ -165,7 +165,6 @@
           <% end %>
         </li>
       <% end %>
-    <% end %>
     </ul>
   </div>
 </div>
